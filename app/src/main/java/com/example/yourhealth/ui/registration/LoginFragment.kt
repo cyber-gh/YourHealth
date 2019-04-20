@@ -23,8 +23,9 @@ class LoginFragment : QFragment(R.layout.login_fragment) {
 
 
         login.onClick {
-            Rep.updateDatabase()
-            //Rep.login(emailField.text.toString(), passwordField.text.toString())
+            //Rep.updateDatabase()
+            if (emailField.text.toString() != "" && passwordField.text.toString() != "")
+            Rep.login(emailField.text.toString(), passwordField.text.toString())
         }
 
     }

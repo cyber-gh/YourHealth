@@ -4,6 +4,7 @@ import android.content.ContentValues.TAG
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
+import com.example.yourhealth.Router
 import com.example.yourhealth.models.GeneralInfo
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -31,6 +32,7 @@ class Repository {
             task -> if (task.isSuccessful) {
             Log.d(TAG, "signInWithEmail:success")
             user = auth.currentUser
+            Router.showGeneralStatsFragment()
 
         }   else {
             Log.w(TAG, "signInWithEmail:failure", task.exception)
