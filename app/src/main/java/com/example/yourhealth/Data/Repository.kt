@@ -49,7 +49,7 @@ class Repository {
     }
 
     fun getGeneralStats() {
-        val ref = database.getReference("test/GeneralStats")
+        val ref = database.getReference(username.extractUser() + "/generalStats")
 
         ref.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -67,7 +67,7 @@ class Repository {
     }
 
     fun retrieveUser() {
-        val ref = database.getReference("test")
+        val ref = database.getReference(username.extractUser())
 
         ref.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -84,9 +84,26 @@ class Repository {
         })
     }
 
+    fun addUser(usr: UserInfo) {
+//        val ref = database.getReference("doctortest/")
+//        usr.type == "doctor"
+//
+//        ref.setValue(usr)
+    }
+
 
 
     
     
 
+}
+
+
+fun String.extractUser(): String {
+    var rs: String = ""
+    for (letter in this) {
+        if (letter == '@') return rs
+        rs += letter
+    }
+    return rs
 }

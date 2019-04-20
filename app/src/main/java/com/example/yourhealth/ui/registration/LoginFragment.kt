@@ -12,6 +12,7 @@ import com.example.yourhealth.Data.Rep
 import com.example.yourhealth.R
 import com.example.yourhealth.Router
 import com.qlibrary.library.QFragment
+import com.qlibrary.library.infoAlert
 import com.qlibrary.utils.extensions.onClick
 import kotlinx.android.synthetic.main.login_fragment.*
 
@@ -33,11 +34,13 @@ class LoginFragment : QFragment(R.layout.login_fragment) {
                 Rep.password = passwordField.text.toString()
                 Rep.login(emailField.text.toString(), passwordField.text.toString())
                 Rep.retrieveUser()
+                Thread.sleep(3000)
                 Rep.userInfo.observe(this, Observer {
                     if (it.type == "pacient") Router.showGeneralStatsFragment()
                     else {
-
+                            infoAlert("Not impelmented")
                     }
+                    Rep.addUser(it)
                 })
             }
         }
