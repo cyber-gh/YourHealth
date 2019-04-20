@@ -14,7 +14,8 @@
                                                        android:background="@drawable/round_top"
                                                        android:layout_marginEnd="32dp"
                                                        android:layout_marginStart="32dp"
-                                                       app:layout_constraintHorizontal_bias="1.0">
+                                                       app:layout_constraintHorizontal_bias="1.0"
+                                                       android:layout_marginTop="16dp">
 
         <TextView
                 android:text="Today:"
