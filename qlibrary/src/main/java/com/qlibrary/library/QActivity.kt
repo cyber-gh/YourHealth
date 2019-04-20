@@ -19,5 +19,20 @@ abstract class QActivity : AppCompatActivity() {
         initialize()
     }
 
+    fun showFragment(fragment: Fragment, contentId: Int, addToBackStack: Boolean = true){
+
+        val transaction = supportFragmentManager.beginTransaction()
+
+        if(supportFragmentManager.fragments.size == 0) {
+            transaction.add(contentId, fragment)
+        }
+        else {
+
+            transaction.replace(contentId, fragment)
+        }
+        if(addToBackStack) transaction.addToBackStack(null)
+        transaction.commit()
+    }
+
     abstract fun initialize()
 }

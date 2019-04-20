@@ -1,5 +1,6 @@
 package com.example.yourhealth
 
+import android.Manifest
 import android.os.Bundle
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -11,12 +12,27 @@ import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
+import androidx.core.app.ActivityCompat
+import androidx.fragment.app.Fragment
+import com.qlibrary.library.QActivity
+import kotlinx.android.synthetic.main.app_bar_main.*
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : QActivity(), NavigationView.OnNavigationItemSelectedListener {
 
+
+    override fun initialize() {
+        Router.activity = this
+
+        ActivityCompat.requestPermissions(
+            this, arrayOf(
+                Manifest.permission.INTERNET
+            ), 2
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        initialize()
         setContentView(R.layout.activity_main)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -35,6 +51,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         navView.setNavigationItemSelectedListener(this)
+        Router.showLoginFragment()
+
+    }
+
+    fun showFragment(fragment: Fragment, addToBackStack: Boolean = true){
+        super.showFragment(fragment, content.id, addToBackStack)
     }
 
     override fun onBackPressed() {
