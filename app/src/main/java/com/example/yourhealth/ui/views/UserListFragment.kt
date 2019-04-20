@@ -3,9 +3,11 @@ package com.example.yourhealth.ui.views
 import android.content.Context
 import com.example.yourhealth.Data.Rep
 import com.example.yourhealth.R
+import com.example.yourhealth.Router
 import com.example.yourhealth.models.UserInfo
 import com.qlibrary.library.QRecycleListFragment
 import com.qlibrary.library.QRecycleView
+import com.qlibrary.utils.extensions.onClick
 import kotlinx.android.synthetic.main.user_minimal_view.view.*
 
 class UserListFragment : QRecycleListFragment<UserInfo, UserListFragment.UserView>() {
@@ -36,6 +38,9 @@ class UserListFragment : QRecycleListFragment<UserInfo, UserListFragment.UserVie
             stat1.text = data.generalStats.bloodPressure.toString()
 
             stat2.text = data.generalStats.sugarLevel.toString()
+            pacientVIew.onClick {
+                Router.showGeneralStatsFragment()
+            }
         }
 
         override fun getLayoutId() = R.layout.user_minimal_view
