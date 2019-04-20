@@ -109,6 +109,7 @@ open class QRecycleListFragment<T,V: QRecycleView<T>> : QFragment(R.layout.reycl
         private fun load() {
             isLoading = true
             getMoreData(page).ioConsume({
+                data.clear()
                 data.addAll(it)
                 dataLoadedObs.emit()
                 if (lastPageSize > it.size) finished = true

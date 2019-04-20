@@ -4,6 +4,7 @@ import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.yourhealth.Router
+import com.example.yourhealth.models.Appointment
 import com.example.yourhealth.models.GeneralStats
 import com.example.yourhealth.models.UserInfo
 import com.google.firebase.auth.FirebaseAuth
@@ -14,6 +15,7 @@ import com.qlibrary.utils.delegates.prefString
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.ValueEventListener
+import com.qlibrary.library.infoAlert
 import com.qlibrary.utils.Res
 import com.qlibrary.utils.extensions.BS
 import com.qlibrary.utils.extensions.emit
@@ -94,6 +96,33 @@ class Repository {
     }
 
 
+    fun getAppointments() : BS<List<Appointment>> {
+        val obs = BS.create<List<Appointment>>()
+
+        val ref = database.getReference("appointments")
+
+        ref.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val rs = mutableListOf<Appointment>()
+                for (postSnapshot in dataSnapshot.children) {
+                    val retriev = postSnapshot.getValue(Appointment::class.java)
+                    if (retriev != null) rs.add(retriev)
+                }
+                obs.emit(rs as List<Appointment>)
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
+                // ...
+                obs.onError(Throwable(message = "Cant connect to database"))
+            }
+        })
+
+        return obs
+
+    }
+
     fun getUsers(): BS<List<UserInfo>> {
         val returnObs = BS.create<List<UserInfo>>()
         val ref = database.getReference()
@@ -104,7 +133,11 @@ class Repository {
                 val rs = mutableListOf<UserInfo>()
                 for (postSnapshot in dataSnapshot.children) {
                     val retriev = postSnapshot.getValue(UserInfo::class.java)
-                    if (retriev != null && retriev.type == "pacient") rs.add(retriev)
+                    if (retriev != null && retriev.type == "pacient" && retriev.name != "Default Name") {
+                        rs.add(retriev)
+                        if (retriev.generalStats.bloodPressure > 120 || retriev.generalStats.bloodPressure <= 30)
+                            infoAlert("Warning ${retriev.name} is having an anormal heart beat")
+                    }
                 }
                 returnObs.emit(rs as List<UserInfo>)
             }

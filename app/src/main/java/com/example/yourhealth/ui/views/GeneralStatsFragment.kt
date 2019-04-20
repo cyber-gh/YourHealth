@@ -22,7 +22,7 @@ class GeneralStatsFragment: QFragment(R.layout.user_stats) {
         if (Rep.userInfo.value?.type == "pacient") stats = Rep.userGeneralStats
         else {
             textView4.text = "Name"
-            textView5.text = "It is working"
+            textView5.text =  "Jake"
         }
 
         stats.observe(this, Observer {

@@ -95,7 +95,7 @@ class MainActivity : QActivity(), NavigationView.OnNavigationItemSelectedListene
                 Router.showMoveStatsFragment()
             }
             R.id.nav_tools -> {
-
+                Router.showAppointmentListFragment()
             }
             R.id.nav_share -> {
 

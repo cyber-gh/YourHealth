@@ -3,10 +3,7 @@ package com.example.yourhealth
 import androidx.lifecycle.MutableLiveData
 import com.example.yourhealth.models.UserInfo
 import com.example.yourhealth.ui.registration.LoginFragment
-import com.example.yourhealth.ui.views.GeneralStatsFragment
-import com.example.yourhealth.ui.views.MoveStatsFragment
-import com.example.yourhealth.ui.views.SleepStatsFragment
-import com.example.yourhealth.ui.views.UserListFragment
+import com.example.yourhealth.ui.views.*
 
 object Router {
     lateinit var activity: MainActivity
@@ -44,5 +41,9 @@ object Router {
 
     fun showUserListFragment() {
         activity.showFragment(UserListFragment.newInstance() , false)
+    }
+
+    fun showAppointmentListFragment() {
+        activity.showFragment(AppointmentsListFragment.newInstance(), false)
     }
 }

@@ -25,7 +25,6 @@ class UserListFragment : QRecycleListFragment<UserInfo, UserListFragment.UserVie
 
             getMoreData = {
                 Rep.getUsers()
-
             }
         }
     }
@@ -34,7 +33,7 @@ class UserListFragment : QRecycleListFragment<UserInfo, UserListFragment.UserVie
     class UserView(context: Context) : QRecycleView<UserInfo>(context) {
 
         override fun setContent(data: UserInfo) {
-            name.text = data.type
+            name.text = data.name
             stat1.text = data.generalStats.bloodPressure.toString()
 
             stat2.text = data.generalStats.sugarLevel.toString()
