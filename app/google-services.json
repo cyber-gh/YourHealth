@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "20223550918",
+    "firebase_url": "https://your-health.firebaseio.com",
+    "project_id": "your-health",
+    "storage_bucket": "your-health.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:20223550918:android:3d9d99c308e3c05e",
+        "android_client_info": {
+          "package_name": "com.example.yourhealth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "20223550918-rhm629et4f3kql4e65igvmvi1lce4dk4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4fJsm_C3pDqeHYgcZ28Eazn9QexggHgY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "20223550918-rhm629et4f3kql4e65igvmvi1lce4dk4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
