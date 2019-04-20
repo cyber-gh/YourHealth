@@ -141,7 +141,8 @@
             android:id="@+id/textView11" android:fontFamily="@font/poppins_light"
             android:textSize="14dp"
             app:layout_constraintStart_toStartOf="@+id/textView10" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/textView10" app:layout_constraintEnd_toEndOf="@+id/textView10"/>
+            app:layout_constraintTop_toBottomOf="@+id/textView10" app:layout_constraintEnd_toEndOf="@+id/textView10"
+            android:layout_marginBottom="16dp" app:layout_constraintBottom_toBottomOf="parent"/>
     <ImageView
             android:layout_width="80dp"
             android:layout_height="83dp" app:srcCompat="@drawable/blue_consultation"
@@ -164,7 +165,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/textView13" app:layout_constraintStart_toStartOf="@+id/textView12"
             app:layout_constraintEnd_toEndOf="@+id/textView12" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/textView12"/>
+            app:layout_constraintTop_toBottomOf="@+id/textView12" android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"/>
     <TextView
             android:text="______________"
             android:layout_width="wrap_content"
