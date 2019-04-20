@@ -1,6 +1,7 @@
 package com.example.yourhealth
 
 import com.example.yourhealth.ui.registration.LoginFragment
+import com.example.yourhealth.ui.views.GeneralStatsFragment
 
 object Router {
     lateinit var activity: MainActivity
@@ -19,5 +20,9 @@ object Router {
 
     fun showLoginFragment() {
         activity.showFragment(LoginFragment(), false)
+    }
+
+    fun showGeneralStatsFragment() {
+        activity.showFragment(GeneralStatsFragment(), false)
     }
 }
