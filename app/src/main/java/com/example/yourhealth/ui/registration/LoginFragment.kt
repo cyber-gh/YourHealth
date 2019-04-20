@@ -38,7 +38,7 @@ class LoginFragment : QFragment(R.layout.login_fragment) {
                 Rep.userInfo.observe(this, Observer {
                     if (it.type == "pacient") Router.showGeneralStatsFragment()
                     else {
-                            infoAlert("Not impelmented")
+                            Router.showUserListFragment()
                     }
                     Rep.addUser(it)
                 })

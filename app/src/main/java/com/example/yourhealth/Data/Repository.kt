@@ -14,7 +14,9 @@ import com.qlibrary.utils.delegates.prefString
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.ValueEventListener
-
+import com.qlibrary.utils.Res
+import com.qlibrary.utils.extensions.BS
+import com.qlibrary.utils.extensions.emit
 
 
 val Rep = Repository()
@@ -85,12 +87,39 @@ class Repository {
     }
 
     fun addUser(usr: UserInfo) {
-//        val ref = database.getReference("doctortest/")
-//        usr.type == "doctor"
-//
-//        ref.setValue(usr)
+        val ref = database.getReference("doctortest/")
+        usr.type == "doctor"
+
+        ref.setValue(usr)
     }
 
+
+    fun getUsers(): BS<List<UserInfo>> {
+        val returnObs = BS.create<List<UserInfo>>()
+        val ref = database.getReference()
+
+
+        ref.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val rs = mutableListOf<UserInfo>()
+                for (postSnapshot in dataSnapshot.children) {
+                    val retriev = postSnapshot.getValue(UserInfo::class.java)
+                    if (retriev != null) rs.add(retriev)
+                }
+                returnObs.emit(rs as List<UserInfo>)
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
+                // ...
+                returnObs.onError(Throwable(message = "Cant connect to database"))
+            }
+        })
+
+        return returnObs
+
+    }
 
 
     

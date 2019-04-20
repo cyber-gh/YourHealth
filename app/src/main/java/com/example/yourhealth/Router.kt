@@ -4,6 +4,7 @@ import com.example.yourhealth.ui.registration.LoginFragment
 import com.example.yourhealth.ui.views.GeneralStatsFragment
 import com.example.yourhealth.ui.views.MoveStatsFragment
 import com.example.yourhealth.ui.views.SleepStatsFragment
+import com.example.yourhealth.ui.views.UserListFragment
 
 object Router {
     lateinit var activity: MainActivity
@@ -33,5 +34,9 @@ object Router {
 
     fun showMoveStatsFragment() {
         activity.showFragment(MoveStatsFragment(), false)
+    }
+
+    fun showUserListFragment() {
+        activity.showFragment(UserListFragment.newInstance() , false)
     }
 }
