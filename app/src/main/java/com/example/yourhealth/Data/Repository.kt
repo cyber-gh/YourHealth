@@ -2,17 +2,15 @@ package com.example.yourhealth.Data
 
 import android.content.ContentValues.TAG
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.example.yourhealth.Router
-import com.example.yourhealth.models.GeneralInfo
+import com.example.yourhealth.models.GeneralStats
+import com.example.yourhealth.models.UserInfo
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.FirebaseDatabase
 import com.qlibrary.library.errAlert
-import com.qlibrary.utils.Res
 import com.qlibrary.utils.delegates.prefString
-import com.qlibrary.utils.extensions.toast
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.ValueEventListener
@@ -26,8 +24,8 @@ class Repository {
     private var user: FirebaseUser? = null
     private val database = FirebaseDatabase.getInstance()
 
-    var userGeneralStats = MutableLiveData<GeneralInfo>()
-
+    var userGeneralStats = MutableLiveData<GeneralStats>()
+    var userInfo = MutableLiveData<UserInfo>()
     init {
         
     }
@@ -41,7 +39,6 @@ class Repository {
             task -> if (task.isSuccessful) {
             Log.d(TAG, "signInWithEmail:success")
             user = auth.currentUser
-            Router.showGeneralStatsFragment()
 
         }   else {
             Log.w(TAG, "signInWithEmail:failure", task.exception)
@@ -51,10 +48,6 @@ class Repository {
         }
     }
 
-    fun loadUserGeneralStats() {
-        
-    }
-
     fun getGeneralStats() {
         val ref = database.getReference("test/GeneralStats")
 
@@ -62,7 +55,7 @@ class Repository {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                userGeneralStats.value = dataSnapshot.getValue(GeneralInfo::class.java)
+                userGeneralStats.value = dataSnapshot.getValue(GeneralStats::class.java)
                 Log.d(TAG, "Value retrieved: " )
             }
 
@@ -72,6 +65,26 @@ class Repository {
             }
         })
     }
+
+    fun retrieveUser() {
+        val ref = database.getReference("test")
+
+        ref.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                userInfo.value = dataSnapshot.getValue(UserInfo::class.java)
+                Log.d(TAG, "Value retrieved: " )
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException())
+            }
+        })
+    }
+
+
 
     
     

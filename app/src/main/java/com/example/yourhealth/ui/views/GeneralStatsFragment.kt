@@ -5,7 +5,6 @@ import android.view.View
 import androidx.lifecycle.Observer
 import com.example.yourhealth.Data.Rep
 import com.example.yourhealth.R
-import com.example.yourhealth.models.GeneralInfo
 import com.qlibrary.library.QFragment
 import kotlinx.android.synthetic.main.user_stats.*
 

@@ -16,12 +16,12 @@
             android:layout_marginTop="10dp" android:fontFamily="@font/poppins_light" android:textColor="#85000000"/>
     <ImageView
             android:layout_width="154dp"
-            android:src="@drawable/main_logo"
+            android:src="@drawable/final_logo"
             android:layout_height="177dp"
             android:id="@+id/imageView2" app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp" android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/final_logo"/>
+/>
     <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

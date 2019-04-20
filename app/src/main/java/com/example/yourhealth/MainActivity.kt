@@ -96,7 +96,7 @@ class MainActivity : QActivity(), NavigationView.OnNavigationItemSelectedListene
 
             }
             R.id.nav_slideshow -> {
-
+                Router.showMoveStatsFragment()
             }
             R.id.nav_tools -> {
 

@@ -7,8 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.lifecycle.Observer
 import com.example.yourhealth.Data.Rep
 import com.example.yourhealth.R
+import com.example.yourhealth.Router
 import com.qlibrary.library.QFragment
 import com.qlibrary.utils.extensions.onClick
 import kotlinx.android.synthetic.main.login_fragment.*
@@ -21,11 +23,23 @@ class LoginFragment : QFragment(R.layout.login_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        emailField.setText(Rep.username)
+        passwordField.setText(Rep.password)
 
         login.onClick {
-            //Rep.updateDatabase()
-            if (emailField.text.toString() != "" && passwordField.text.toString() != "")
-            Rep.login(emailField.text.toString(), passwordField.text.toString())
+
+            if (emailField.text.toString() != "" && passwordField.text.toString() != "") {
+                Rep.username = emailField.text.toString()
+                Rep.password = passwordField.text.toString()
+                Rep.login(emailField.text.toString(), passwordField.text.toString())
+                Rep.retrieveUser()
+                Rep.userInfo.observe(this, Observer {
+                    if (it.type == "pacient") Router.showGeneralStatsFragment()
+                    else {
+
+                    }
+                })
+            }
         }
 
     }
