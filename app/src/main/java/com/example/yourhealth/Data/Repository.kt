@@ -13,6 +13,11 @@ import com.qlibrary.library.errAlert
 import com.qlibrary.utils.Res
 import com.qlibrary.utils.delegates.prefString
 import com.qlibrary.utils.extensions.toast
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.ValueEventListener
+
+
 
 val Rep = Repository()
 
@@ -22,6 +27,10 @@ class Repository {
     private val database = FirebaseDatabase.getInstance()
 
     var userGeneralStats = MutableLiveData<GeneralInfo>()
+
+    init {
+        
+    }
 
     var username by prefString("")
     var password by prefString("")
@@ -42,11 +51,26 @@ class Repository {
         }
     }
 
-    fun updateDatabase() {
-        val ref = database.getReference("general")
-        val info = GeneralInfo()
-        ref.setValue(info)
+    fun loadUserGeneralStats() {
+        
+    }
 
+    fun getGeneralStats() {
+        val ref = database.getReference("test/GeneralStats")
+
+        ref.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                userGeneralStats.value = dataSnapshot.getValue(GeneralInfo::class.java)
+                Log.d(TAG, "Value retrieved: " )
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException())
+            }
+        })
     }
 
     

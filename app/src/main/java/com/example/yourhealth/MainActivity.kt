@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
 import androidx.core.app.ActivityCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.qlibrary.library.QActivity
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -88,7 +89,7 @@ class MainActivity : QActivity(), NavigationView.OnNavigationItemSelectedListene
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_home -> {
-                // Handle the camera action
+                Router.showGeneralStatsFragment()
             }
             R.id.nav_gallery -> {
 
