@@ -104,7 +104,7 @@ class Repository {
                 val rs = mutableListOf<UserInfo>()
                 for (postSnapshot in dataSnapshot.children) {
                     val retriev = postSnapshot.getValue(UserInfo::class.java)
-                    if (retriev != null) rs.add(retriev)
+                    if (retriev != null && retriev.type == "pacient") rs.add(retriev)
                 }
                 returnObs.emit(rs as List<UserInfo>)
             }

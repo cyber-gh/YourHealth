@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.user_stats.*
 
 class GeneralStatsFragment: QFragment(R.layout.user_stats) {
 
-    private lateinit var stats: MutableLiveData<GeneralStats>
+    lateinit var stats: MutableLiveData<GeneralStats>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -20,6 +20,10 @@ class GeneralStatsFragment: QFragment(R.layout.user_stats) {
         Rep.getGeneralStats()
 
         if (Rep.userInfo.value?.type == "pacient") stats = Rep.userGeneralStats
+        else {
+            textView4.text = "Name"
+            textView5.text = "It is working"
+        }
 
         stats.observe(this, Observer {
             heartRateLabel.text = it?.bloodPressure.toString()

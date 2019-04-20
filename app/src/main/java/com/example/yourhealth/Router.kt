@@ -1,5 +1,7 @@
 package com.example.yourhealth
 
+import androidx.lifecycle.MutableLiveData
+import com.example.yourhealth.models.UserInfo
 import com.example.yourhealth.ui.registration.LoginFragment
 import com.example.yourhealth.ui.views.GeneralStatsFragment
 import com.example.yourhealth.ui.views.MoveStatsFragment
@@ -25,8 +27,12 @@ object Router {
         activity.showFragment(LoginFragment(), false)
     }
 
-    fun showGeneralStatsFragment() {
-        activity.showFragment(GeneralStatsFragment(), false)
+    fun showGeneralStatsFragment(userStats: UserInfo? = null) {
+
+        val frag = GeneralStatsFragment()
+        frag.stats = MutableLiveData()
+        frag.stats.value = userStats?.generalStats
+        activity.showFragment(frag, true)
     }
     fun showSleepStatsFragment() {
         activity.showFragment(SleepStatsFragment(), false)

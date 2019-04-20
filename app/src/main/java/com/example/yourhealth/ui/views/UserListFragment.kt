@@ -39,7 +39,7 @@ class UserListFragment : QRecycleListFragment<UserInfo, UserListFragment.UserVie
 
             stat2.text = data.generalStats.sugarLevel.toString()
             pacientVIew.onClick {
-                Router.showGeneralStatsFragment()
+                Router.showGeneralStatsFragment(data)
             }
         }
 
