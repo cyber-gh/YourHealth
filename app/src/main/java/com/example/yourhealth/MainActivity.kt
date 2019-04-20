@@ -92,6 +92,7 @@ class MainActivity : QActivity(), NavigationView.OnNavigationItemSelectedListene
                 Router.showGeneralStatsFragment()
             }
             R.id.nav_gallery -> {
+                Router.showSleepStatsFragment()
 
             }
             R.id.nav_slideshow -> {
